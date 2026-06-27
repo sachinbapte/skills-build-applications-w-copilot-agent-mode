@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from './config/database';
 import apiRouter from './routes/api';
+import healthRouter from './routes/health';
 
 dotenv.config();
 
@@ -15,9 +16,7 @@ const baseUrl = codespaceName
 
 app.use(cors());
 app.use(express.json());
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', baseUrl });
-});
+app.use('/api', healthRouter);
 app.use('/api', apiRouter);
 
 const startServer = async (): Promise<void> => {

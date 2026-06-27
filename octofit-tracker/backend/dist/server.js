@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const database_1 = require("./config/database");
 const api_1 = __importDefault(require("./routes/api"));
+const health_1 = __importDefault(require("./routes/health"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT ? Number(process.env.PORT) : 8000;
@@ -17,9 +18,7 @@ const baseUrl = codespaceName
     : 'http://localhost:8000';
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.get('/api/health', (_req, res) => {
-    res.json({ status: 'ok', baseUrl });
-});
+app.use('/api', health_1.default);
 app.use('/api', api_1.default);
 const startServer = async () => {
     await (0, database_1.connectDatabase)();
