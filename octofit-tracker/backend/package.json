@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "ts-node src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "seed": "ts-node src/scripts/seed.ts"
   },
   "dependencies": {
+    "@types/cors": "^2.8.19",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
